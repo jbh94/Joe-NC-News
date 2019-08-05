@@ -8,7 +8,6 @@ exports.formatDates = list => {
 };
 
 exports.makeRefObj = list => {
-  if (list === undefined) return [];
   const refObj = {};
   list.forEach(obj => {
     return (refObj[obj.title] = obj.article_id);
@@ -17,5 +16,15 @@ exports.makeRefObj = list => {
 };
 
 exports.formatComments = (comments, articleRef) => {
-  if (comments) return [];
+  if (!comments.length) return [];
+  return comments.map(comment => {
+    const { created_by, belongs_to, created_at, ...keys } = comment;
+    const obj = {
+      author: created_by,
+      article_id: articleRef[comment],
+      created_at: new Date(created_at),
+      ...keys
+    };
+    return obj;
+  });
 };

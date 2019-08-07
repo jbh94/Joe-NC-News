@@ -1,5 +1,5 @@
 exports.up = function(knex) {
-  console.log('Creating the Articles table..');
+  // console.log('Creating the Articles table..');
   return knex.schema.createTable('articles', articlesTable => {
     articlesTable.increments('article_id').primary();
     articlesTable.string('title');
@@ -12,6 +12,6 @@ exports.up = function(knex) {
 };
 exports.down = function(knex) {
   // contains the logic to undo the update in the up function
-  console.log('Removing Articles tables..');
+  // console.log('Removing Articles tables..');
   return knex.schema.dropTable('articles');
 };

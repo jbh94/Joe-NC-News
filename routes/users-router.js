@@ -1,6 +1,10 @@
 const usersRouter = require('express').Router();
-const { sendUsers } = require('../controllers/users-controller');
+const { sendOneUser } = require('../controllers/users-controller');
+const { methodNotFound } = require('../errors');
 
-usersRouter.route('/:username').get(sendUsers);
+usersRouter
+  .route('/:username')
+  .get(sendOneUser)
+  .all(methodNotFound);
 
 module.exports = usersRouter;

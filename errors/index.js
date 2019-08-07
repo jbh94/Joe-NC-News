@@ -1,5 +1,5 @@
 exports.methodNotFound = (req, res, next) => {
-  res.status(405).send({ msg: 'Method is not allowed' });
+  res.status(405).send({ msg: 'Method is not found' });
 };
 
 exports.SQLerrors = (err, req, res, next) => {

@@ -1,5 +1,5 @@
 exports.up = function(knex) {
-  console.log('Creating the Comments table..');
+  // console.log('Creating the Comments table..');
   return knex.schema.createTable('comments', commentsTable => {
     commentsTable.increments('comment_id').primary();
     commentsTable.text('author').references('users.username');
@@ -12,6 +12,6 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   // contains the logic to undo the update in the up function
-  console.log('Removing Comments tables..');
+  // console.log('Removing Comments tables..');
   return knex.schema.dropTable('comments');
 };

@@ -1,7 +1,13 @@
-const { fetchUsers } = require('../models/users-model');
+const { fetchOneUser } = require('../models/users-model');
 
-exports.sendUsers = (req, res, next) => {
-  fetchUsers().then(users => {
-    res.status(200).send({ users });
-  });
+exports.sendOneUser = (req, res, next) => {
+  const { username } = req.params;
+  fetchOneUser(username)
+    .then(user => {
+      res.status(200).send({ user });
+    })
+    .catch(err => {
+      console.log(err);
+      next(err);
+    });
 };

@@ -89,8 +89,38 @@ describe('/api', () => {
         .get('/api/users/mickeymouse')
         .expect(404)
         .then(({ body }) => {
-          console.log(body);
           expect(body.message).to.equal('Username not found');
+        });
+    });
+  });
+  describe('GET /api/articles/:article_id', () => {
+    // it('GET /api/articles', () => {
+    //   return request(app)
+    //     .get('/api/articles')
+    //     .expect(200)
+    //     .then(({ body }) => {
+    //       console.log(body.articles);
+    //       expect(body.articles).to.be.an('Array');
+    //     });
+    // });
+    it('GET /api/articles/:article_id should respond with a 200 error code and a response object of an article with the specified properties', () => {
+      return request(app)
+        .get('/api/articles/1')
+        .expect(200)
+        .then(({ body }) => {
+          console.log(body.article);
+          expect(body.article).to.be.an('Object');
+          expect(body.article).to.have.keys(
+            'article_id',
+            'title',
+            'body',
+            'votes',
+            'topic',
+            'author',
+            'created_at',
+            'comment_count'
+          );
+          expect(body.article.article_id).to.equal(1);
         });
     });
   });

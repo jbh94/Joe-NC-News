@@ -21,7 +21,7 @@ exports.formatComments = (comments, articleRef) => {
     const { created_by, belongs_to, created_at, ...keys } = comment;
     const obj = {
       author: created_by,
-      article_id: articleRef[comment],
+      article_id: articleRef[belongs_to],
       created_at: new Date(created_at),
       ...keys
     };

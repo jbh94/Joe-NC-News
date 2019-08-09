@@ -227,7 +227,7 @@ describe('/api', () => {
     });
   });
   describe('GET /api/articles/', () => {
-    it('GET api/articlesssss should return an error code of 404 and a message', () => {
+    it('GET api/articlesssss should return an status code of 404 and a message', () => {
       return request(app)
         .get('/api/articlesssss')
         .expect(404)
@@ -235,13 +235,14 @@ describe('/api', () => {
           expect(body.msg).to.equal('Route not found');
         });
     });
-    it('GET /api/articles/', () => {
+    it('GET /api/articles/ should return an status code of 200 and an array of all the articles from the provided endpoint', () => {
       return request(app)
         .get('/api/articles/')
         .expect(200)
         .then(({ body }) => {
-          console.log(body);
-          expect(body.articles).to.have.keys(
+          expect(body.articles).to.be.an('Array');
+          expect(body.articles[0]).to.be.an('Object');
+          expect(body.articles[0]).to.have.keys(
             'author',
             'title',
             'article_id',

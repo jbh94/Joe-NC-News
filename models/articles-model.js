@@ -53,16 +53,18 @@ exports.postComment = ({ article_id }, { username, body }) => {
 };
 
 exports.getAllArticles = () => {
-  return connection
+  return connection('articles')
     .select(
       'articles.author',
-      'title',
+      'articles.title',
       'articles.article_id',
-      'topic',
+      'articles.topic',
       'articles.created_at',
       'articles.votes'
     )
-    .from('articles')
+    .count({ comment_count: 'comments.article_id' })
+    .leftJoin('comments', 'articles.article_id', 'comments.article_id')
+    .groupBy('articles.article_id')
     .then(articles => {
       if (!articles.length) {
         return Promise.reject({ status: 404, msg: 'Articles not found' });

@@ -23,7 +23,7 @@ articlesRouter
   .all(methodNotFound);
 
 articlesRouter
-  .route('/articles')
+  .route('/')
   .get(getArticles)
   .all(methodNotFound);
 

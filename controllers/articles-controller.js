@@ -24,7 +24,7 @@ exports.patchVotes = (req, res, next) => {
 };
 
 exports.getArticles = (req, res, next) => {
-  getAllArticles(req.query)
+  getAllArticles()
     .then(articles => {
       res.status(200).send({ articles });
     })
